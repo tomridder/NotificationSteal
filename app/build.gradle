@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
-        applicationId "com.torkuds.noticeinterceptor"
+        applicationId "com.torkuds.notificationSteal"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1

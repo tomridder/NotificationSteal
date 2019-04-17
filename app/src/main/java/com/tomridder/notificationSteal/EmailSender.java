@@ -1,7 +1,4 @@
-package com.torkuds.noticeinterceptor;
-
-import android.media.MediaCas;
-import android.webkit.MimeTypeMap;
+package com.tomridder.notificationSteal;
 
 import java.io.File;
 import java.util.Date;

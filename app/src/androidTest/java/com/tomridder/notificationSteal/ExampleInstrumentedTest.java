@@ -1,4 +1,4 @@
-package com.torkuds.noticeinterceptor;
+package com.tomridder.notificationSteal;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.torkuds.noticeinterceptor", appContext.getPackageName());
+        assertEquals("com.torkuds.notificationSteal", appContext.getPackageName());
     }
 }

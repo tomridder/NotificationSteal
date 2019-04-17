@@ -1,4 +1,4 @@
-package com.torkuds.noticeinterceptor;
+package com.tomridder.notificationSteal;
 
 import org.junit.Test;
 

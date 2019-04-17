@@ -1,4 +1,4 @@
-package com.torkuds.noticeinterceptor;
+package com.tomridder.notificationSteal;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
