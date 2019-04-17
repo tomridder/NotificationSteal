@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -21,11 +22,54 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 public class MainActivity extends AppCompatActivity {
 
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     Button notificationMonitorOffBtn;
     Button notificationMonitorOnBtn;
+    private  String path1=Environment.getExternalStorageDirectory().toString()+ File.separator+"tasks.txt";
+
+    final Handler handler=new Handler();
+    Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+            sendEmail();
+            handler.postDelayed(this,60000);
+        }
+    };
+    public  void sendEmail()
+    {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EmailSender sender = new EmailSender();
+                    //设置服务器地址和端口，可以查询网络
+                    sender.setProperties("smtp.163.com", "25");
+                    //分别设置发件人，邮件标题和文本内容
+                    sender.setMessage("tomridder716@163.com", " 你好" + "-" ,
+                            "通知内容请见附件");
+                    //设置收件人
+                    sender.setReceiver(new String[]{"tomridder716@163.com"});
+                    //添加附件换成你手机里正确的路径
+                    sender.addAttachment(path1);
+                    //发送邮件
+                    //sender.setMessage"&#x4f60;&#x7684;163&#x90ae;&#x7bb1;&#x8d26;&#x53f7;", "EmailS//ender", "Java Mail &#xff01;");&#x8fd9;&#x91cc;&#x9762;&#x4e24;&#x4e2a;&#x90ae;&#x7bb1;&#x8d26;&#x53f7;&#x8981;&#x4e00;&#x81f4;
+                    sender.sendEmail("smtp.163.com", "tomridder716@163.com", "请填入你的163授权码，不是登录密码。");
+                } catch (AddressException e) {
+                    e.printStackTrace();
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        Log.i("MainActivityMTS","send email tried");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             notificationMonitorOffBtn.setVisibility(View.INVISIBLE);
         }
         initPermission();
+        handler.postDelayed(runnable,60000);
     }
 
     private void initPermission()

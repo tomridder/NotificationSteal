@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NoticeInterceptor-master.iml" filepath="$PROJECT_DIR$/NoticeInterceptor-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NotificationSteal.iml" filepath="$PROJECT_DIR$/NotificationSteal.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
