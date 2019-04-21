@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -16,6 +17,9 @@ import javax.mail.internet.AddressException;
 
 public class SendMailService extends Service {
 
+
+    private Restart restart;
+
     private final static String path1= Environment.getExternalStorageDirectory().toString()+ File.separator+"tasks.txt";
 
     public SendMailService() {
@@ -25,6 +29,16 @@ public class SendMailService extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        restart=new Restart();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("Restart");
+        registerReceiver(restart,intentFilter);
+
     }
 
     @Override
@@ -39,6 +53,15 @@ public class SendMailService extends Service {
         //manager.cancel(pi);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
         return super.onStartCommand(intent,flags,startId);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Intent intent=new Intent();
+        intent.setAction("Restart");
+        sendBroadcast(intent);
     }
 
     public  void sendEmail()

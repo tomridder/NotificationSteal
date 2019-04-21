@@ -17,7 +17,11 @@
         <service
             android:name=".SendMailService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+            </intent-filter>
+        </service>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -36,6 +40,7 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>
